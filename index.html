@@ -32,7 +32,36 @@ max-width: 1200px;
 margin: 0 auto;
 padding: 0 20px;
 }
-/* Header & Navigation */
+
+/* --- UI Components: Toast Notification --- */
+.toast {
+visibility: hidden;
+min-width: 250px;
+background-color: #333;
+color: #fff;
+text-align: center;
+border-radius: 8px;
+padding: 16px;
+position: fixed;
+z-index: 2000;
+left: 50%;
+bottom: 30px;
+transform: translateX(-50%);
+font-size: 1rem;
+box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+opacity: 0;
+transition: opacity 0.3s, bottom 0.3s;
+}
+.toast.show {
+visibility: visible;
+opacity: 1;
+bottom: 50px;
+}
+.toast.success {
+background-color: var(--secondary);
+}
+
+/* --- Header & Navigation --- */
 header {
 position: fixed;
 top: 0;
@@ -97,7 +126,8 @@ cursor: pointer;
 color: var(--light);
 font-size: 1.5rem;
 }
-/* Hero Section */
+
+/* --- Hero Section --- */
 .hero {
 height: 100vh;
 background: linear-gradient(rgba(10, 46, 92, 0.8), rgba(10, 46, 92, 0.9)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgkVv3gSscjUD7o8oYBaKMWF_p3N8_JzVHl8ACUj4ov_msviayK2BdOp1OVizmEaD-QVNYgpJHkgwXHnKezSdfNAdxa9EnXiYhlCjU_-O2Vt6cQEI1zqTUheq7G2yVAB6fzdADox23NdDA20zzXao2OkFMBWXv0vvfc8qLf8Txz3a12spjrTcltcOQSBb2G/s320/proyecto.gif') no-repeat center center/cover;
@@ -174,7 +204,8 @@ color: var(--primary);
 transform: translateY(-3px);
 box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
 }
-/* About Section */
+
+/* --- Sections Generic --- */
 .section {
 padding: 100px 0;
 }
@@ -203,9 +234,11 @@ border-radius: 2px;
 .section-title p {
 font-size: 1.1rem;
 color: #666;
-max-width: 700px;
+max-width: 800px;
 margin: 20px auto 0;
 }
+
+/* --- About Section --- */
 .about-container {
 display: flex;
 flex-wrap: wrap;
@@ -294,9 +327,113 @@ transition: transform 0.5s ease;
 .about-image:hover img {
 transform: scale(1.05);
 }
-/* Video Section */
+
+/* --- NEW: Services Section --- */
+.services-section {
+background-color: #f0f4f8;
+}
+.services-intro {
+text-align: center;
+max-width: 900px;
+margin: 0 auto 60px;
+font-size: 1.15rem;
+color: #555;
+line-height: 1.7;
+}
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+gap: 30px;
+}
+.service-card {
+background: var(--light);
+border-radius: 15px;
+padding: 30px;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+transition: all 0.3s ease;
+border-left: 5px solid var(--accent);
+display: flex;
+flex-direction: column;
+height: 100%;
+}
+.service-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+border-left: 5px solid var(--secondary);
+}
+.service-header {
+display: flex;
+align-items: center;
+margin-bottom: 20px;
+}
+.service-number {
+font-size: 3rem;
+font-weight: 800;
+color: rgba(10, 46, 92, 0.1);
+line-height: 1;
+margin-right: 15px;
+}
+.service-icon {
+font-size: 2.5rem;
+color: var(--primary);
+width: 60px;
+text-align: center;
+}
+.service-content h3 {
+font-size: 1.4rem;
+color: var(--primary);
+margin-bottom: 15px;
+}
+.service-content p.desc {
+font-size: 1rem;
+color: #666;
+margin-bottom: 20px;
+font-style: italic;
+}
+.service-list {
+list-style: none;
+margin-bottom: 25px;
+flex-grow: 1;
+}
+.service-list li {
+position: relative;
+padding-left: 25px;
+margin-bottom: 10px;
+font-size: 0.95rem;
+color: #444;
+line-height: 1.5;
+}
+.service-list li::before {
+content: '\f058';
+font-family: 'Font Awesome 6 Free';
+font-weight: 900;
+position: absolute;
+left: 0;
+top: 2px;
+color: var(--accent);
+}
+.service-results {
+background-color: rgba(46, 125, 50, 0.1);
+padding: 15px;
+border-radius: 8px;
+margin-top: auto;
+}
+.service-results strong {
+color: var(--secondary);
+display: block;
+font-size: 0.9rem;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+margin-bottom: 5px;
+}
+.service-results span {
+font-size: 0.95rem;
+color: #333;
+}
+
+/* --- Video Section --- */
 .video-section {
-padding: 100px 0;
+padding: 80px 0; /* Reduced padding slightly to keep it closer to hero */
 background-color: var(--gray);
 }
 .video-container {
@@ -320,7 +457,8 @@ width: 100%;
 height: 100%;
 border: none;
 }
-/* Tools Section */
+
+/* --- Tools Section --- */
 .tools {
 background-color: var(--light);
 }
@@ -390,7 +528,8 @@ margin: 0;
 font-weight: 600;
 color: var(--secondary);
 }
-/* Differentiation Section */
+
+/* --- Differentiation Section --- */
 .differentiation {
 background: linear-gradient(135deg, var(--primary), #1a3e72);
 color: var(--light);
@@ -476,7 +615,8 @@ border-left: 10px solid var(--accent);
 font-weight: 600;
 font-size: 1.1rem;
 }
-/* Case Study Section */
+
+/* --- Case Study Section --- */
 .case-studies {
 padding: 100px 0;
 }
@@ -542,7 +682,8 @@ border-radius: 20px;
 font-size: 0.8rem;
 font-weight: 600;
 }
-/* Team Section */
+
+/* --- Team Section --- */
 .team {
 background-color: var(--gray);
 }
@@ -626,7 +767,8 @@ left: 0;
 top: 2px;
 color: var(--accent);
 }
-/* Commitment Section */
+
+/* --- Commitment Section --- */
 .commitment {
 text-align: center;
 padding: 80px 0;
@@ -670,7 +812,8 @@ margin-bottom: 15px;
 font-size: 1rem;
 line-height: 1.6;
 }
-/* Contact Section */
+
+/* --- Contact Section --- */
 .contact-container {
 display: flex;
 flex-wrap: wrap;
@@ -803,7 +946,8 @@ background-color: var(--primary);
 color: var(--light);
 transform: translateY(-5px);
 }
-/* Footer */
+
+/* --- Footer --- */
 footer {
 background-color: var(--primary);
 color: var(--light);
@@ -857,7 +1001,8 @@ border-top: 1px solid rgba(255, 255, 255, 0.1);
 font-size: 0.9rem;
 color: #aaa;
 }
-/* Animations */
+
+/* --- Animations --- */
 @keyframes fadeInUp {
 from {
 opacity: 0;
@@ -877,7 +1022,8 @@ transition: all 0.8s ease;
 opacity: 1;
 transform: translateY(0);
 }
-/* Responsive Design */
+
+/* --- Responsive Design --- */
 @media (max-width: 992px) {
 .hero h1 {
 font-size: 2.8rem;
@@ -928,6 +1074,9 @@ padding: 70px 0;
 .section-title h2 {
 font-size: 2rem;
 }
+.services-grid {
+grid-template-columns: 1fr;
+}
 .integration-steps {
 flex-direction: column;
 align-items: center;
@@ -964,7 +1113,7 @@ padding: 150px 0 100px;
 .hero h1 {
 font-size: 2rem;
 }
-.tool-card, .case-card, .team-member {
+.tool-card, .case-card, .team-member, .service-card {
 padding: 20px;
 }
 .case-image {
@@ -984,9 +1133,11 @@ padding-bottom: 75%; /* Adjust for mobile */
 <ul class="nav-menu">
 <li><a href="#inicio">Inicio</a></li>
 <li><a href="#nosotros">Nosotros</a></li>
-<li><a href="#video">Video Presentación</a></li>
+<!-- NEW BUTTON: Servicios -->
+<li><a href="#servicios" style="color: var(--accent); font-weight: 600;">Servicios</a></li>
+<li><a href="#video">Video</a></li>
 <li><a href="#herramientas">Herramientas</a></li>
-<li><a href="#casos">Casos de Estudio</a></li>
+<li><a href="#casos">Casos</a></li>
 <li><a href="#equipo">Equipo</a></li>
 <li><a href="https://geonort.blogspot.com/2025/08/cursos-disponibles.html" target="_blank">Cursos</a></li>
 <li><a href="#contacto">Contacto</a></li>
@@ -996,6 +1147,7 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </div>
 </header>
+
 <!-- Hero Section -->
 <section class="hero" id="inicio">
 <div class="container">
@@ -1009,6 +1161,22 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </div>
 </section>
+
+<!-- Video Section (MOVED TO TOP AS REQUESTED) -->
+<section class="video-section" id="video">
+<div class="container">
+<div class="section-title">
+<h2>Video Presentación</h2>
+<p>Descubre cómo transformamos la gestión del territorio con tecnología de punta</p>
+</div>
+<div class="video-container">
+<div class="video-wrapper">
+<iframe src="https://www.youtube.com/embed/QAQoTJk9Gfk" title="Geonorte - Presentación" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+</section>
+
 <!-- About Section -->
 <section class="section" id="nosotros">
 <div class="container">
@@ -1054,20 +1222,186 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </div>
 </section>
-<!-- Video Section -->
-<section class="video-section" id="video">
+
+<!-- NEW: Services Section (Inserted in Middle) -->
+<section class="section services-section" id="servicios">
 <div class="container">
 <div class="section-title">
-<h2>Video Presentación</h2>
-<p>Descubre cómo transformamos la gestión del territorio con tecnología de punta</p>
+<h2>Nuestros Servicios</h2>
+<p>Soluciones integrales para la identificación, evaluación y gestión del territorio.</p>
 </div>
-<div class="video-container">
-<div class="video-wrapper">
-<iframe src="https://www.youtube.com/embed/QAQoTJk9Gfk" title="Geonorte - Presentación" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<div class="services-intro">
+Somos una empresa especializada en el análisis del territorio mediante tecnologías geoespaciales avanzadas, orientada a apoyar la toma de decisiones en proyectos de exploración minera, infraestructura, gestión ambiental y gestión del riesgo. Integramos SIG, teledetección, drones, modelamiento territorial e inteligencia artificial para ofrecer soluciones técnicas sólidas, eficientes y adaptadas al contexto local.
+</div>
+
+<div class="services-grid">
+<!-- Servicio 1: Exploración Minera -->
+<div class="service-card animate-in">
+<div class="service-header">
+<div class="service-number">01</div>
+<div class="service-icon"><i class="fas fa-gem"></i></div>
+</div>
+<div class="service-content">
+<h3>Exploración Minera</h3>
+<p class="desc">Servicios integrales para la identificación, evaluación y priorización de áreas con potencial mineral.</p>
+<ul class="service-list">
+<li>Análisis de imágenes satelitales (Sentinel-2, Landsat, ASTER, Sentinel-1).</li>
+<li>Aplicación de índices espectrales y alteraciones hidrotermales.</li>
+<li>Análisis estructural y lineamientos geológicos.</li>
+<li>Evaluación de potencial aluvial y primario.</li>
+<li>Integración SIG multicriterio para generación de mapas prospectivos.</li>
+<li>Apoyo técnico para campañas de exploración en campo.</li>
+</ul>
+</div>
+<div class="service-results">
+<strong>Resultados:</strong>
+<span>Mapas de áreas prioritarias, informes técnicos y soporte para toma de decisiones.</span>
 </div>
 </div>
+
+<!-- Servicio 2: Topografía y Geomática -->
+<div class="service-card animate-in">
+<div class="service-header">
+<div class="service-number">02</div>
+<div class="service-icon"><i class="fas fa-ruler-combined"></i></div>
+</div>
+<div class="service-content">
+<h3>Topografía y Geomática</h3>
+<p class="desc">Levantamientos topográficos precisos para proyectos de ingeniería, minería, catastro e infraestructura.</p>
+<ul class="service-list">
+<li>Levantamientos topográficos con GNSS y estación total.</li>
+<li>Fotogrametría con drones (UAS).</li>
+<li>Generación de MDT, MDS, curvas de nivel y ortomosaicos.</li>
+<li>Cálculo de volúmenes (corte y relleno).</li>
+<li>Control y supervisión de obras.</li>
+</ul>
+</div>
+<div class="service-results">
+<strong>Resultados:</strong>
+<span>Planos topográficos, modelos digitales y productos cartográficos certificados.</span>
+</div>
+</div>
+
+<!-- Servicio 3: Catastro y Gestión de Tierras -->
+<div class="service-card animate-in">
+<div class="service-header">
+<div class="service-number">03</div>
+<div class="service-icon"><i class="fas fa-map-marked-alt"></i></div>
+</div>
+<div class="service-content">
+<h3>Catastro y Gestión de Tierras</h3>
+<p class="desc">Soluciones técnicas para la administración, actualización y modernización catastral.</p>
+<ul class="service-list">
+<li>Catastro urbano y rural.</li>
+<li>Actualización y saneamiento de información predial.</li>
+<li>Integración SIG–Catastro–Base de datos.</li>
+<li>Implementación de QGIS, QField y PostGIS.</li>
+<li>Auditoría técnica de bases de datos catastrales.</li>
+</ul>
+</div>
+<div class="service-results">
+<strong>Resultados:</strong>
+<span>Bases de datos catastrales confiables y sistemas territoriales operativos.</span>
+</div>
+</div>
+
+<!-- Servicio 4: IA aplicada al Territorio -->
+<div class="service-card animate-in">
+<div class="service-header">
+<div class="service-number">04</div>
+<div class="service-icon"><i class="fas fa-brain"></i></div>
+</div>
+<div class="service-content">
+<h3>IA aplicada al Territorio</h3>
+<p class="desc">Soluciones basadas en IA y machine learning para el análisis espacial avanzado.</p>
+<ul class="service-list">
+<li>Clasificación automática de imágenes satelitales.</li>
+<li>Detección de cambios y anomalías.</li>
+<li>Modelos predictivos espaciales.</li>
+<li>Visión por computadora aplicada a drones (YOLO, Deep Learning).</li>
+<li>Optimización de procesos territoriales mediante IA.</li>
+</ul>
+</div>
+<div class="service-results">
+<strong>Resultados:</strong>
+<span>Modelos inteligentes que reducen tiempos, costos y aumentan precisión.</span>
+</div>
+</div>
+
+<!-- Servicio 5: Desarrollo de Herramientas y Automatización -->
+<div class="service-card animate-in">
+<div class="service-header">
+<div class="service-number">05</div>
+<div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+</div>
+<div class="service-content">
+<h3>Herramientas y Automatización</h3>
+<p class="desc">Herramientas digitales personalizadas para optimizar flujos de trabajo técnicos.</p>
+<ul class="service-list">
+<li>Scripts y aplicaciones en Python para SIG.</li>
+<li>Automatización de procesos en QGIS y Google Earth Engine.</li>
+<li>Dashboards geoespaciales.</li>
+<li>Integración de SIG con hojas de cálculo, bases de datos y mensajería.</li>
+<li>Desarrollo de geoportales web.</li>
+</ul>
+</div>
+<div class="service-results">
+<strong>Resultados:</strong>
+<span>Soluciones a medida que mejoran la eficiencia operativa.</span>
+</div>
+</div>
+
+<!-- Servicio 6: Hidrología y Recursos Hídricos -->
+<div class="service-card animate-in">
+<div class="service-header">
+<div class="service-number">06</div>
+<div class="service-icon"><i class="fas fa-water"></i></div>
+</div>
+<div class="service-content">
+<h3>Hidrología y Recursos Hídricos</h3>
+<p class="desc">Análisis hidrológico y modelamiento para gestión sostenible del agua.</p>
+<ul class="service-list">
+<li>Delimitación de cuencas y subcuencas.</li>
+<li>Modelado hidrológico con DEM.</li>
+<li>Análisis de drenaje y escorrentía.</li>
+<li>Evaluación de disponibilidad hídrica.</li>
+<li>Apoyo a estudios ambientales y mineros.</li>
+</ul>
+</div>
+<div class="service-results">
+<strong>Resultados:</strong>
+<span>Mapas, modelos hidrológicos e informes técnicos.</span>
+</div>
+</div>
+
+<!-- Servicio 7: Gestión de Riesgos y Medio Ambiente -->
+<div class="service-card animate-in">
+<div class="service-header">
+<div class="service-number">07</div>
+<div class="service-icon"><i class="fas fa-exclamation-triangle"></i></div>
+</div>
+<div class="service-content">
+<h3>Gestión de Riesgos y Medio Ambiente</h3>
+<p class="desc">Evaluación y análisis de amenazas naturales y antrópicas para la reducción de riesgos.</p>
+<ul class="service-list">
+<li>Análisis de riesgos por inundaciones, deslizamientos y erosión.</li>
+<li>Modelos de susceptibilidad y vulnerabilidad.</li>
+<li>Evaluaciones multicriterio para ordenamiento territorial.</li>
+<li>Apoyo técnico para planes de gestión de riesgos.</li>
+<li>Monitoreo ambiental con SIG y teledetección.</li>
+</ul>
+</div>
+<div class="service-results">
+<strong>Resultados:</strong>
+<span>Herramientas técnicas para la prevención y planificación territorial.</span>
+</div>
+</div>
+
+</div> <!-- End Grid -->
 </div>
 </section>
+
 <!-- Tools Section -->
 <section class="section tools" id="herramientas">
 <div class="container">
@@ -1111,6 +1445,7 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </div>
 </section>
+
 <!-- Case Studies Section -->
 <section class="section case-studies" id="casos">
 <div class="container">
@@ -1161,9 +1496,29 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </div>
 </div>
+
+<!-- NEW: Irupana Mining Case -->
+<div class="case-card animate-in">
+<!-- Placeholder image representing mining/geology exploration -->
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzd-rL_UbpU7jhO_RbQD_dcLBsagII445qJZYW7v3dMplAhdkV2CJGIEL2HUwVm1QKSSz0Do1vxFP4aKdRi70vMUkxRR6OCse1x9QWIcbBmZrkkMa4fjxS1h87xh12onLSXwIKtGTKcnBfTBBovqLmFNPr8Bv09zYEtCveQ7giNRahdb1qDKraGo3af-pI/s400/Gemini_Generated_Image_hlkbnbhlkbnbhlkb%20%281%29.png" alt="Exploración Minera Irupana" class="case-image">
+<div class="case-content">
+<span class="location">Sector Sur de Irupana</span>
+<h3>Exploración Minera Integral</h3>
+<p>Realizamos un estudio integral de exploración minera en el sector sur de Irupana combinando imágenes satelitales (Sentinel-2, Landsat 8–9) y algoritmos de IA para identificar depósitos auríferos y aluviales. Aplicamos índices espectrales y modelos de elevación para priorizar áreas objetivo. Posteriormente, ejecutamos campañas de reconocimiento geológico y muestreo en campo, validando anomalías y optimizando tiempos y costos. El resultado fue la generación de mapas de prospectividad minera y una base técnica sólida.</p>
+<div class="case-technologies">
+<span class="tech-tag">Imágenes Satelitales</span>
+<span class="tech-tag">IA y Machine Learning</span>
+<span class="tech-tag">Análisis Espectral</span>
+<span class="tech-tag">DEM</span>
+<span class="tech-tag">Cartografía Geomorfológica</span>
+</div>
+</div>
+</div>
+
 </div>
 </div>
 </section>
+
 <!-- Differentiation Section -->
 <section class="section differentiation" id="diferencia">
 <div class="container">
@@ -1204,6 +1559,7 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </div>
 </section>
+
 <!-- Impact Section -->
 <section class="section" id="impacto">
 <div class="container">
@@ -1242,6 +1598,7 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </div>
 </section>
+
 <!-- Team Section -->
 <section class="section team" id="equipo">
 <div class="container">
@@ -1260,9 +1617,9 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 <div class="team-member animate-in">
 <div class="member-image">
-<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjv4hDa8abzaBRdxWgaDpBNW1PkVXdOidrMx1oJM1lGOlJK6oVX8Jg5Q2DL1Ppl5TmveslVgKZbaX1WSGMSXyynU-3y7K8I7IDg6caeBZC7TksmnYtOpG10k9q8rQxKuJ46QiSDbcVYJpHOxOFrp5pkxEFVpQDCL0f7jfD2cqkW8nhd4dXp_N99KSRWgwtM/w142-h395/edited-image-1756935588992.png" alt="Ivan Edu Choque Alcon">
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpq2y_KP0G2Zxl67E0HtFzXKBFR1RqVqFGQKScmsfvvewoeY5OY54oZYy3YTVOH0kGDQ_sN5Oqo1lUcrEOoKe10jghtG2zmbK981PWF-f54qBLFQB2SVS6dg22TMKtMZPyZCHUJosDlpgu2mN0CSEurXlk_8YQ5xNgA8Wz9kY96J6RPQ0g_kg99hg_gnEl/s320/Gemini_Generated_Image_1h48ex1h48ex1h48.png" alt="Ivan Edu Choque Alcon">
 </div>
-<h3> Ivan Edu Choque Alcon</h3>
+<h3>Ivan Edu Choque Alcon</h3>
 <div class="title">Lic. - Gerente</div>
 <p>Experto en Catastro y gestión de proyectos con enfoque en desarrollo sostenible.</p>
 </div>
@@ -1277,6 +1634,7 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </div>
 </section>
+
 <!-- Commitment Section -->
 <section class="commitment">
 <div class="container">
@@ -1308,6 +1666,7 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </div>
 </section>
+
 <!-- Contact Section -->
 <section class="section" id="contacto">
 <div class="container">
@@ -1325,6 +1684,19 @@ padding-bottom: 75%; /* Adjust for mobile */
 <div class="form-group">
 <label for="email">Correo electrónico</label>
 <input type="email" id="email" class="form-control" required>
+</div>
+<div class="form-group">
+<label for="service">Servicio de interés</label>
+<select id="service" class="form-control">
+<option value="general">Información General</option>
+<option value="minería">Exploración Minera</option>
+<option value="topografia">Topografía y Geomática</option>
+<option value="catastro">Catastro y Gestión de Tierras</option>
+<option value="ia">IA aplicada al Territorio</option>
+<option value="automatizacion">Desarrollo de Herramientas</option>
+<option value="hidrologia">Hidrología y Recursos Hídricos</option>
+<option value="riesgos">Gestión de Riesgos</option>
+</select>
 </div>
 <div class="form-group">
 <label for="message">Mensaje</label>
@@ -1403,6 +1775,7 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </div>
 </section>
+
 <!-- Footer -->
 <footer>
 <div class="container">
@@ -1416,8 +1789,8 @@ padding-bottom: 75%; /* Adjust for mobile */
 <ul class="footer-links">
 <li><a href="#inicio">Inicio</a></li>
 <li><a href="#nosotros">Nosotros</a></li>
+<li><a href="#servicios">Servicios</a></li>
 <li><a href="#video">Video Presentación</a></li>
-<li><a href="#herramientas">Herramientas</a></li>
 <li><a href="#casos">Casos de Estudio</a></li>
 <li><a href="https://geonort.blogspot.com/2025/08/cursos-disponibles.html" target="_blank">Cursos</a></li>
 </ul>
@@ -1446,6 +1819,10 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </div>
 </footer>
+
+<!-- Toast Notification Container -->
+<div id="toast" class="toast">Mensaje enviado con éxito</div>
+
 <script>
 // Mobile Navigation
 const hamburger = document.querySelector('.hamburger');
@@ -1462,6 +1839,7 @@ navMenu.classList.remove('active');
 hamburger.innerHTML = '<i class="fas fa-bars"></i>';
 });
 });
+
 // Scroll Animation
 const animateElements = document.querySelectorAll('.animate-in');
 const observer = new IntersectionObserver((entries) => {
@@ -1474,15 +1852,23 @@ entry.target.classList.add('appear');
 animateElements.forEach(element => {
 observer.observe(element);
 });
-// Form Submission
+
+// Form Submission (Improved with Toast instead of Alert)
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
 contactForm.addEventListener('submit', function(e) {
 e.preventDefault();
-alert('¡Gracias por contactarnos! Hemos recibido tu mensaje y nos pondremos en contacto contigo pronto.');
+// Simulate form submission
+const toast = document.getElementById('toast');
+toast.className = 'toast show success';
+toast.innerText = '¡Gracias! Hemos recibido tu mensaje.';
+setTimeout(function(){ 
+toast.className = toast.className.replace('show', ''); 
 contactForm.reset();
+}, 3000);
 });
 }
+
 // Header scroll effect
 window.addEventListener('scroll', function() {
 const header = document.querySelector('header');
@@ -1494,6 +1880,7 @@ header.style.padding = '15px 0';
 header.style.boxShadow = 'none';
 }
 });
+
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 anchor.addEventListener('click', function (e) {
@@ -1512,4 +1899,3 @@ behavior: 'smooth'
 </script>
 </body>
 </html>
-
