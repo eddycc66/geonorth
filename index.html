@@ -60,6 +60,9 @@ bottom: 50px;
 .toast.success {
 background-color: var(--secondary);
 }
+.toast.error {
+background-color: #d32f2f;
+}
 
 /* --- Header & Navigation --- */
 header {
@@ -997,7 +1000,7 @@ transform: translateX(5px);
 .footer-bottom {
 text-align: center;
 padding-top: 30px;
-border-top: 1px solid rgba(255, 255, 255, 0.1);
+border-top: 1px solid rgba(255,255, 255, 0.1);
 font-size: 0.9rem;
 color: #aaa;
 }
@@ -1617,6 +1620,7 @@ Somos una empresa especializada en el análisis del territorio mediante tecnolog
 </div>
 <div class="team-member animate-in">
 <div class="member-image">
+<!-- Updated Image URL -->
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpq2y_KP0G2Zxl67E0HtFzXKBFR1RqVqFGQKScmsfvvewoeY5OY54oZYy3YTVOH0kGDQ_sN5Oqo1lUcrEOoKe10jghtG2zmbK981PWF-f54qBLFQB2SVS6dg22TMKtMZPyZCHUJosDlpgu2mN0CSEurXlk_8YQ5xNgA8Wz9kY96J6RPQ0g_kg99hg_gnEl/s320/Gemini_Generated_Image_1h48ex1h48ex1h48.png" alt="Ivan Edu Choque Alcon">
 </div>
 <h3>Ivan Edu Choque Alcon</h3>
@@ -1676,18 +1680,19 @@ Somos una empresa especializada en el análisis del territorio mediante tecnolog
 </div>
 <div class="contact-container">
 <div class="contact-form animate-in">
-<form id="contactForm">
+<!-- UPDATED Formspree Action -->
+<form id="contactForm" action="https://formspree.io/f/xpqprpqy" method="POST">
 <div class="form-group">
 <label for="name">Nombre completo</label>
-<input type="text" id="name" class="form-control" required>
+<input type="text" id="name" name="name" class="form-control" required>
 </div>
 <div class="form-group">
 <label for="email">Correo electrónico</label>
-<input type="email" id="email" class="form-control" required>
+<input type="email" id="email" name="email" class="form-control" required>
 </div>
 <div class="form-group">
 <label for="service">Servicio de interés</label>
-<select id="service" class="form-control">
+<select id="service" name="service" class="form-control">
 <option value="general">Información General</option>
 <option value="minería">Exploración Minera</option>
 <option value="topografia">Topografía y Geomática</option>
@@ -1700,7 +1705,7 @@ Somos una empresa especializada en el análisis del territorio mediante tecnolog
 </div>
 <div class="form-group">
 <label for="message">Mensaje</label>
-<textarea id="message" class="form-control" required placeholder="Cuéntanos sobre tu proyecto o desafío territorial..."></textarea>
+<textarea id="message" name="message" class="form-control" required placeholder="Cuéntanos sobre tu proyecto o desafío territorial..."></textarea>
 </div>
 <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
 </form>
@@ -1853,19 +1858,53 @@ animateElements.forEach(element => {
 observer.observe(element);
 });
 
-// Form Submission (Improved with Toast instead of Alert)
+// Form Submission (REAL FUNCTIONALITY)
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
 contactForm.addEventListener('submit', function(e) {
 e.preventDefault();
-// Simulate form submission
+const data = new FormData(contactForm);
+const action = contactForm.action;
+const button = contactForm.querySelector('button[type="submit"]');
+const originalText = button.innerText;
+
+// UI Loading State
+button.innerText = 'Enviando...';
+button.disabled = true;
+
+fetch(action, {
+method: 'POST',
+body: data,
+headers: {
+'Accept': 'application/json'
+}
+}).then(response => {
+if (response.ok) {
+// Success
 const toast = document.getElementById('toast');
 toast.className = 'toast show success';
 toast.innerText = '¡Gracias! Hemos recibido tu mensaje.';
+contactForm.reset();
 setTimeout(function(){ 
 toast.className = toast.className.replace('show', ''); 
-contactForm.reset();
 }, 3000);
+} else {
+throw new Error('Error en el servidor');
+}
+}).catch(error => {
+// Error
+const toast = document.getElementById('toast');
+toast.className = 'toast show error';
+toast.innerText = 'Hubo un error al enviar. Inténtalo de nuevo.';
+console.error('Error:', error);
+setTimeout(function(){ 
+toast.className = toast.className.replace('show', ''); 
+}, 3000);
+}).finally(() => {
+// Reset Button State
+button.innerText = originalText;
+button.disabled = false;
+});
 });
 }
 
