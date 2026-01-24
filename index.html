@@ -1,3 +1,11 @@
+
+
+Aquí tienes el código completo de la página web. He realizado los siguientes cambios para implementar tu solicitud:
+
+1.  **HTML:** He reemplazado el texto `Geo<span>norte</span>` dentro del enlace `.logo` por la etiqueta `<img>` utilizando la URL exacta que proporcionaste.
+2.  **CSS:** He actualizado el estilo de `.logo`. Como ahora es una imagen, eliminé las fuentes y colores de texto, y ajusté la altura (`height`) de la imagen para que se vea proporcional y elegante dentro del encabezado.
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -71,7 +79,7 @@ top: 0;
 left: 0;
 width: 100%;
 z-index: 1000;
-background: rgba(10, 46, 92, 0.9);
+background: rgba(10, 46, 92, 0.95); /* Slightly increased opacity for logo contrast */
 backdrop-filter: blur(10px);
 padding: 15px 0;
 transition: all 0.3s ease;
@@ -81,17 +89,24 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 }
+
+/* Updated Logo Styles for Image */
 .logo {
-color: var(--light);
-font-size: 1.8rem;
-font-weight: 700;
 text-decoration: none;
 display: flex;
 align-items: center;
+padding: 5px 0; /* Add some padding for breathing room */
 }
-.logo span {
-color: var(--accent);
+.logo img {
+height: 50px; /* Adjust the size of the logo */
+width: auto;
+display: block;
+transition: transform 0.3s ease;
 }
+.logo img:hover {
+transform: scale(1.05);
+}
+
 .nav-menu {
 display: flex;
 list-style: none;
@@ -331,7 +346,7 @@ transition: transform 0.5s ease;
 transform: scale(1.05);
 }
 
-/* --- NEW: Services Section --- */
+/* --- Services Section --- */
 .services-section {
 background-color: #f0f4f8;
 }
@@ -436,7 +451,7 @@ color: #333;
 
 /* --- Video Section --- */
 .video-section {
-padding: 80px 0; /* Reduced padding slightly to keep it closer to hero */
+padding: 80px 0;
 background-color: var(--gray);
 }
 .video-container {
@@ -446,7 +461,7 @@ text-align: center;
 }
 .video-wrapper {
 position: relative;
-padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+padding-bottom: 56.25%;
 height: 0;
 overflow: hidden;
 border-radius: 15px;
@@ -1033,10 +1048,10 @@ font-size: 2.8rem;
 }
 .nav-menu {
 position: fixed;
-top: 80px;
+top: 70px; /* Adjusted for image logo height */
 left: -100%;
 width: 100%;
-height: calc(100vh - 80px);
+height: calc(100vh - 70px);
 background-color: var(--primary);
 flex-direction: column;
 align-items: center;
@@ -1123,7 +1138,10 @@ padding: 20px;
 height: 200px;
 }
 .video-wrapper {
-padding-bottom: 75%; /* Adjust for mobile */
+padding-bottom: 75%; 
+}
+.logo img {
+height: 40px; /* Smaller logo on mobile */
 }
 }
 </style>
@@ -1132,11 +1150,13 @@ padding-bottom: 75%; /* Adjust for mobile */
 <!-- Header -->
 <header>
 <div class="container nav-container">
-<a href="#" class="logo">Geo<span>norte</span></a>
+<!-- LOGO UPDATED WITH IMAGE -->
+<a href="#" class="logo">
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQXCA3ZDW0bQrgKNtU8bR5FYE2CcJkFDUdKvl3cLnUq7tNJ5zSTbXXENCkF8RsjxEmJySQV_AeH0m9EjDVKvETFZnoDsvaNoBCzkubUzPkxguJ9tnp6TBIyHT8i6eDcFoINClVA7H5jk9IolilukfYqGt8gPZGEKN2UDHC2dfKvkeNspJCkkX3jeXBID7h/s1022/ChatGPT%20Image%2024%20ene%202026,%2009_40_57%20a.m..png" alt="Geonorte Logo">
+</a>
 <ul class="nav-menu">
 <li><a href="#inicio">Inicio</a></li>
 <li><a href="#nosotros">Nosotros</a></li>
-<!-- NEW BUTTON: Servicios -->
 <li><a href="#servicios" style="color: var(--accent); font-weight: 600;">Servicios</a></li>
 <li><a href="#video">Video</a></li>
 <li><a href="#herramientas">Herramientas</a></li>
@@ -1226,7 +1246,7 @@ padding-bottom: 75%; /* Adjust for mobile */
 </div>
 </section>
 
-<!-- NEW: Services Section (Inserted in Middle) -->
+<!-- Services Section (Inserted in Middle) -->
 <section class="section services-section" id="servicios">
 <div class="container">
 <div class="section-title">
@@ -1500,7 +1520,7 @@ Somos una empresa especializada en el análisis del territorio mediante tecnolog
 </div>
 </div>
 
-<!-- NEW: Irupana Mining Case -->
+<!-- Irupana Mining Case -->
 <div class="case-card animate-in">
 <!-- Placeholder image representing mining/geology exploration -->
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzd-rL_UbpU7jhO_RbQD_dcLBsagII445qJZYW7v3dMplAhdkV2CJGIEL2HUwVm1QKSSz0Do1vxFP4aKdRi70vMUkxRR6OCse1x9QWIcbBmZrkkMa4fjxS1h87xh12onLSXwIKtGTKcnBfTBBovqLmFNPr8Bv09zYEtCveQ7giNRahdb1qDKraGo3af-pI/s400/Gemini_Generated_Image_hlkbnbhlkbnbhlkb%20%281%29.png" alt="Exploración Minera Irupana" class="case-image">
