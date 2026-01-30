@@ -72,7 +72,7 @@ top: 0;
 left: 0;
 width: 100%;
 z-index: 1000;
-background: rgba(10, 46, 92, 0.95); /* Slightly increased opacity for logo contrast */
+background: rgba(10, 46, 92, 0.95);
 backdrop-filter: blur(10px);
 padding: 15px 0;
 transition: all 0.3s ease;
@@ -88,10 +88,10 @@ align-items: center;
 text-decoration: none;
 display: flex;
 align-items: center;
-padding: 5px 0; /* Add some padding for breathing room */
+padding: 5px 0;
 }
 .logo img {
-height: 50px; /* Adjust the size of the logo */
+height: 50px;
 width: auto;
 display: block;
 transition: transform 0.3s ease;
@@ -194,6 +194,7 @@ transition: all 0.3s ease;
 cursor: pointer;
 border: none;
 outline: none;
+display: inline-block;
 }
 .btn-primary {
 background-color: var(--accent);
@@ -700,8 +701,9 @@ background-color: var(--gray);
 }
 .team-grid {
 display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 gap: 30px;
+align-items: start; /* Align items to top when expanding */
 }
 .team-member {
 background-color: var(--light);
@@ -710,6 +712,7 @@ padding: 30px 20px;
 text-align: center;
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 transition: all 0.3s ease;
+position: relative;
 }
 .team-member:hover {
 transform: translateY(-10px);
@@ -748,6 +751,61 @@ margin-bottom: 15px;
 color: #666;
 font-size: 0.9rem;
 line-height: 1.5;
+margin-bottom: 20px;
+}
+/* --- Expanding Content Styles --- */
+.member-details {
+display: none;
+text-align: left;
+border-top: 1px solid #eee;
+padding-top: 20px;
+margin-top: 10px;
+background-color: rgba(10, 46, 92, 0.02);
+margin-left: -20px;
+margin-right: -20px;
+padding-left: 20px;
+padding-right: 20px;
+padding-bottom: 20px;
+border-bottom-left-radius: 15px;
+border-bottom-right-radius: 15px;
+animation: fadeIn 0.5s ease-in-out;
+}
+.member-details h4 {
+font-size: 1.1rem;
+color: var(--primary);
+margin-top: 15px;
+margin-bottom: 10px;
+}
+.member-details p {
+font-size: 0.95rem;
+color: var(--text-gray);
+margin-bottom: 10px;
+text-align: justify;
+}
+.member-details ul {
+list-style: none;
+margin-top: 10px;
+}
+.member-details li {
+margin-bottom: 8px;
+font-size: 0.9rem;
+color: var(--dark);
+display: flex;
+align-items: center;
+}
+.member-details li i {
+color: var(--secondary);
+margin-right: 10px;
+}
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.btn-read-more {
+font-size: 0.8rem;
+padding: 8px 20px;
+margin-top: 10px;
+display: inline-block;
 }
 .experience {
 margin-top: 30px;
@@ -1041,7 +1099,7 @@ font-size: 2.8rem;
 }
 .nav-menu {
 position: fixed;
-top: 70px; /* Adjusted for image logo height */
+top: 70px;
 left: -100%;
 width: 100%;
 height: calc(100vh - 70px);
@@ -1134,7 +1192,7 @@ height: 200px;
 padding-bottom: 75%; 
 }
 .logo img {
-height: 40px; /* Smaller logo on mobile */
+height: 40px;
 }
 }
 </style>
@@ -1143,7 +1201,6 @@ height: 40px; /* Smaller logo on mobile */
 <!-- Header -->
 <header>
 <div class="container nav-container">
-<!-- LOGO UPDATED WITH IMAGE -->
 <a href="#" class="logo">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQXCA3ZDW0bQrgKNtU8bR5FYE2CcJkFDUdKvl3cLnUq7tNJ5zSTbXXENCkF8RsjxEmJySQV_AeH0m9EjDVKvETFZnoDsvaNoBCzkubUzPkxguJ9tnp6TBIyHT8i6eDcFoINClVA7H5jk9IolilukfYqGt8gPZGEKN2UDHC2dfKvkeNspJCkkX3jeXBID7h/s1022/ChatGPT%20Image%2024%20ene%202026,%2009_40_57%20a.m..png" alt="Geonorte Logo">
 </a>
@@ -1623,32 +1680,80 @@ Somos una empresa especializada en el análisis del territorio mediante tecnolog
 <p>Un equipo multidisciplinario comprometido con la innovación en las ciencias de la tierra.</p>
 </div>
 <div class="team-grid">
+<!-- MIEMBRO 1: EDWIN -->
 <div class="team-member animate-in">
 <div class="member-image">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhtePgFL8wVUSf05bU00H3f6oyboVbW-Dc9EdgGnwvqCFlTKHp0eai6qqE_XNzdxdgAKt9IG7ZkcdTkEhzyP-JSZpsgpg6jgCTXxSE-1MF1kjvpi0EzE8fXKRNlvt45J7XjWV1Z7jLdpt5Zot0Hp_CBr1dqyyA5cXyndVIHmGLiIEKu2XdSOtco9raEpbeY/s200/Gemini_Generated_Image_gxklargxklargxkl.png" alt="Edwin Calle Condori">
 </div>
 <h3>Edwin Calle Condori</h3>
-<div class="title">M. Sc. - Gerente</div>
-<p>Founder & CEO – Geonorth.</p>
+<div class="title">M. Sc. - Founder & CEO</div>
+<p>Especialista en geomática y análisis geoespacial.</p>
+<button class="btn btn-secondary btn-read-more" onclick="toggleDetails(this)">Leer más</button>
+<div class="member-details">
+<h4>Descripción Profesional</h4>
+<p>Ingeniero Geógrafo y Magíster Scientiarum (M.Sc.) especializado en Geomática e Inteligencia Artificial aplicada al territorio. Como Fundador y CEO de GeoNorth, lidero la vanguardia tecnológica en soluciones espaciales para minería, catastro y gestión de recursos naturales. Con más de 12 años de trayectoria, mi enfoque integra metodologías disruptivas como GeoAI, BIM 6D e IoT para transformar datos complejos en decisiones estratégicas.</p>
+<p>Actualmente, dirijo la expansión estratégica de GeoNorth en la región andina, liderando proyectos de exploración minera y análisis territorial en Perú y Ecuador. A través de alianzas sólidas con socios locales y empresas mineras de primer nivel, estamos redefiniendo la eficiencia operativa en el sector, aplicando automatización avanzada con Python y Google Earth Engine para optimizar la prospección y el monitoreo de activos.</p>
+<p>Mi experiencia se extiende a la coordinación multisectorial con organismos de cooperación y gobiernos, encabezando iniciativas de Minería 4.0, auditorías catastrales y resiliencia climática. Como especialista en Monitoreo, Evaluación y Aprendizaje (MEL), facilito el acompañamiento técnico a ministerios y gobernaciones, asegurando que la tecnología sea el motor del desarrollo sostenible en bosques, agricultura y tierras comunitarias (TCOs).</p>
+<p>Docente universitario y creador de contenido digital, me dedico a democratizar el conocimiento en tecnologías SIG y fotogrametría con drones, posicionando el talento y la innovación geoespacial en el escenario internacional.</p>
+<h4>Áreas de Especialización</h4>
+<ul>
+<li><i class="fas fa-check-circle"></i> Geomática y SIG avanzado</li>
+<li><i class="fas fa-check-circle"></i> GeoAI e Inteligencia Artificial aplicada</li>
+<li><i class="fas fa-check-circle"></i> Catastro y ordenamiento territorial</li>
+<li><i class="fas fa-check-circle"></i> Teledetección y Google Earth Engine</li>
+<li><i class="fas fa-check-circle"></i> Fotogrametría con drones</li>
+<li><i class="fas fa-check-circle"></i> Automatización y Python GIS</li>
+</ul>
 </div>
+</div>
+
+<!-- MIEMBRO 2: IVAN -->
 <div class="team-member animate-in">
 <div class="member-image">
-<!-- Updated Image URL -->
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpq2y_KP0G2Zxl67E0HtFzXKBFR1RqVqFGQKScmsfvvewoeY5OY54oZYy3YTVOH0kGDQ_sN5Oqo1lUcrEOoKe10jghtG2zmbK981PWF-f54qBLFQB2SVS6dg22TMKtMZPyZCHUJosDlpgu2mN0CSEurXlk_8YQ5xNgA8Wz9kY96J6RPQ0g_kg99hg_gnEl/s320/Gemini_Generated_Image_1h48ex1h48ex1h48.png" alt="Ivan Edu Choque Alcon">
 </div>
 <h3>Ivan Edu Choque Alcon</h3>
-<div class="title">Lic. - Gerente</div>
-<p>Experto en Catastro y gestión de proyectos con enfoque en desarrollo sostenible.</p>
+<div class="title">Lic. - Topografo Geodesta</div>
+<p>Especialista en catastro y gestión territorial.</p>
+<button class="btn btn-secondary btn-read-more" onclick="toggleDetails(this)">Leer más</button>
+<div class="member-details">
+<h4>Descripción Profesional</h4>
+<p>Especialista en catastro, gestión territorial y administración de proyectos con enfoque en desarrollo sostenible. Cuenta con experiencia en actualización catastral, levantamiento de información en campo, control de calidad cartográfica y gestión institucional.</p>
+<h4>Áreas de Especialización</h4>
+<ul>
+<li><i class="fas fa-check-circle"></i> Catastro urbano y rural</li>
+<li><i class="fas fa-check-circle"></i> Gestión de proyectos territoriales</li>
+<li><i class="fas fa-check-circle"></i> Ordenamiento territorial</li>
+<li><i class="fas fa-check-circle"></i> Desarrollo sostenible</li>
+<li><i class="fas fa-check-circle"></i> Coordinación técnica y operativa</li>
+</ul>
 </div>
-<!-- NEW TEAM MEMBER INSERTED HERE -->
+</div>
+
+<!-- MIEMBRO 3: WILLY (ACTUALIZADO) -->
 <div class="team-member animate-in">
 <div class="member-image">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYL2FClT55UeovP31vLWuOellMdiKtnCaKF1UQA2pqzTj8v-qd-6OJoZRMXhJqZCg1pdzS-_u2TrUWkIsfP72hec-z_LZgOaEtpOGJaiMReon2hsyFCdRrLVKoA7kn3RRS8wrHetFvxR5ZSf82QYaosEJuxFuMy5a8kM3hS5Rqy84JjjamJnrFnT0Vct20/s200/ChatGPT%20Image%2023%20ene%202026%20%2C%2010_33_24%20p.m..png" alt="Willy Merlo">
 </div>
 <h3>Willy Merlo</h3>
-<div class="title">Ing. Especialista</div>
-<p>Geólogo</p>
+<div class="title">Geólogo</div>
+<p>Especialista en análisis geológico y estructural.</p>
+<button class="btn btn-secondary btn-read-more" onclick="toggleDetails(this)">Leer más</button>
+<div class="member-details">
+<h4>Descripción Profesional</h4>
+<p>Ingeniero Geólogo con sólida trayectoria en análisis geológico e interpretación estructural, enfocado en la viabilidad técnica de proyectos mineros, ambientales y de infraestructura de gran escala. Su expertise se centra en la evaluación precisa del terreno y la comprensión de sistemas estructurales complejos para la mitigación de riesgos y la optimización de recursos.</p>
+<p>Con una visión orientada a resultados, lidera campañas de exploración minera trabajando directamente con empresas transnacionales y cooperativas. Su capacidad analítica permite transformar la observación de campo en modelos geológicos robustos que fundamentan la toma de decisiones en la prospección de yacimientos.</p>
+<h4>Áreas de Especialización</h4>
+<ul>
+<li><i class="fas fa-check-circle"></i> Geología estructural</li>
+<li><i class="fas fa-check-circle"></i> Geomorfología</li>
+<li><i class="fas fa-check-circle"></i> Evaluación de riesgos geológicos</li>
+<li><i class="fas fa-check-circle"></i> Análisis del terreno</li>
+<li><i class="fas fa-check-circle"></i> Soporte técnico para exploración</li>
+</ul>
 </div>
+</div>
+
 </div>
 <div class="experience animate-in">
 <h4>Nuestra Experiencia</h4>
@@ -1702,7 +1807,6 @@ Somos una empresa especializada en el análisis del territorio mediante tecnolog
 </div>
 <div class="contact-container">
 <div class="contact-form animate-in">
-<!-- UPDATED Formspree Action -->
 <form id="contactForm" action="https://formspree.io/f/xpqprpqy" method="POST">
 <div class="form-group">
 <label for="name">Nombre completo</label>
@@ -1866,6 +1970,21 @@ navMenu.classList.remove('active');
 hamburger.innerHTML = '<i class="fas fa-bars"></i>';
 });
 });
+
+// NEW: Team Member Toggle Function
+function toggleDetails(button) {
+const detailsDiv = button.nextElementSibling;
+if (detailsDiv.style.display === "block") {
+detailsDiv.style.display = "none";
+button.innerText = "Leer más";
+button.classList.remove('active');
+} else {
+// Close others if you want accordion style (optional, currently removed for multi-view)
+detailsDiv.style.display = "block";
+button.innerText = "Cerrar";
+button.classList.add('active');
+}
+}
 
 // Scroll Animation
 const animateElements = document.querySelectorAll('.animate-in');
