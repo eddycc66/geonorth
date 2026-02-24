@@ -15,6 +15,10 @@
 --light: #ffffff;
 --dark: #121212;
 --gray: #f5f5f5;
+--whatsapp-green: #25d366;
+}
+html {
+scroll-behavior: smooth;
 }
 * {
 margin: 0;
@@ -32,6 +36,20 @@ width: 100%;
 max-width: 1200px;
 margin: 0 auto;
 padding: 0 20px;
+}
+
+/* --- CORRECCIÓN DE IMÁGENES (Responsive Global) --- */
+img {
+max-width: 100%;
+height: auto;
+display: block; /* Elimina espacios extra debajo */
+}
+
+/* --- Excepción del Logo (Para que no se estire) --- */
+.logo img {
+width: auto;
+height: 50px;
+max-width: none; /* Permite que el logo tenga su ancho natural si es necesario */
 }
 
 /* --- UI Components: Toast Notification --- */
@@ -65,6 +83,58 @@ background-color: var(--secondary);
 background-color: #d32f2f;
 }
 
+/* --- Floating Buttons Area --- */
+#backToTop {
+display: none;
+position: fixed;
+bottom: 100px;
+right: 30px;
+z-index: 99;
+border: none;
+outline: none;
+background-color: var(--accent);
+color: var(--primary);
+cursor: pointer;
+padding: 15px;
+border-radius: 50%;
+font-size: 18px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+transition: all 0.3s ease;
+width: 50px;
+height: 50px;
+}
+#backToTop:hover {
+background-color: var(--primary);
+color: var(--accent);
+transform: translateY(-3px);
+}
+
+/* --- WhatsApp Button --- */
+.whatsapp-float {
+position: fixed;
+width: 60px;
+height: 60px;
+bottom: 30px;
+right: 30px;
+background-color: var(--whatsapp-green);
+color: #FFF;
+border-radius: 50px;
+text-align: center;
+font-size: 30px;
+box-shadow: 2px 2px 3px #999;
+z-index: 100;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.3s ease;
+text-decoration: none;
+}
+.whatsapp-float:hover {
+background-color: #1ebc57;
+transform: scale(1.1);
+box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+}
+
 /* --- Header & Navigation --- */
 header {
 position: fixed;
@@ -76,30 +146,23 @@ background: rgba(10, 46, 92, 0.95);
 backdrop-filter: blur(10px);
 padding: 15px 0;
 transition: all 0.3s ease;
+box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 .nav-container {
 display: flex;
 justify-content: space-between;
 align-items: center;
 }
-
-/* Updated Logo Styles for Image */
 .logo {
 text-decoration: none;
 display: flex;
 align-items: center;
 padding: 5px 0;
 }
-.logo img {
-height: 50px;
-width: auto;
-display: block;
-transition: transform 0.3s ease;
-}
 .logo img:hover {
 transform: scale(1.05);
+transition: transform 0.3s ease;
 }
-
 .nav-menu {
 display: flex;
 list-style: none;
@@ -140,8 +203,10 @@ font-size: 1.5rem;
 
 /* --- Hero Section --- */
 .hero {
-height: 100vh;
-background: linear-gradient(rgba(10, 46, 92, 0.8), rgba(10, 46, 92, 0.9)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-IXzUWoRbBq3yWF-nqdYxqQi-WZlygDRQuKggyax9giw9uweh2SAjTasECvev_StF-brPpYxPSkEcLXc-Cfw1qsdcYuMXQq5J_hfjGkp7eFvpfG7P33IAk9VnxIOMxMLW0Z_42IkzbRAtu05ffU__oV7kYugtr5LdnX3YOCJaxKeW4vcWGDIJhCFLHSsr/s400/Dise%C3%B1o%20sin%20t%C3%ADtulo.gif') no-repeat center center/cover;
+min-height: 100vh;
+height: auto;
+padding: 120px 0 80px;
+background: linear-gradient(rgba(10, 46, 92, 0.85), rgba(10, 46, 92, 0.9)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-IXzUWoRbBq3yWF-nqdYxqQi-WZlygDRQuKggyax9giw9uweh2SAjTasECvev_StF-brPpYxPSkEcLXc-Cfw1qsdcYuMXQq5J_hfjGkp7eFvpfG7P33IAk9VnxIOMxMLW0Z_42IkzbRAtu05ffU__oV7kYugtr5LdnX3YOCJaxKeW4vcWGDIJhCFLHSsr/s400/Dise%C3%B1o%20sin%20t%C3%ADtulo.gif') no-repeat center center/cover;
 display: flex;
 align-items: center;
 position: relative;
@@ -161,9 +226,8 @@ z-index: 1;
 .hero-content {
 position: relative;
 z-index: 2;
-max-width: 700px;
+max-width: 800px;
 color: var(--light);
-animation: fadeInUp 1s ease;
 }
 .hero h1 {
 font-size: 3.5rem;
@@ -220,6 +284,7 @@ box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
 /* --- Sections Generic --- */
 .section {
 padding: 100px 0;
+position: relative;
 }
 .section-title {
 text-align: center;
@@ -333,7 +398,6 @@ transform: perspective(1000px) rotateY(0deg);
 .about-image img {
 width: 100%;
 height: auto;
-display: block;
 transition: transform 0.5s ease;
 }
 .about-image:hover img {
@@ -362,7 +426,7 @@ background: var(--light);
 border-radius: 15px;
 padding: 30px;
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-transition: all 0.3s ease;
+transition: all 0.4s ease;
 border-left: 5px solid var(--accent);
 display: flex;
 flex-direction: column;
@@ -487,10 +551,12 @@ box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 transition: all 0.3s ease;
 position: relative;
 overflow: hidden;
+border: 1px solid #eee;
 }
 .tool-card:hover {
 transform: translateY(-10px);
 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+border-color: var(--accent);
 }
 .tool-card::before {
 content: '';
@@ -703,7 +769,7 @@ background-color: var(--gray);
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 gap: 30px;
-align-items: start; /* Align items to top when expanding */
+align-items: start;
 }
 .team-member {
 background-color: var(--light);
@@ -731,12 +797,15 @@ color: var(--primary);
 font-size: 3rem;
 overflow: hidden;
 }
+/* --- EXCEPCIÓN DEL EQUIPO (ESTRICTA) --- */
 .member-image img {
 width: 100%;
 height: 100%;
 object-fit: cover;
 border-radius: 50%;
 }
+/* ----------------------------------- */
+
 .team-member h3 {
 font-size: 1.3rem;
 color: var(--primary);
@@ -753,7 +822,6 @@ font-size: 0.9rem;
 line-height: 1.5;
 margin-bottom: 20px;
 }
-/* --- Expanding Content Styles --- */
 .member-details {
 display: none;
 text-align: left;
@@ -887,7 +955,7 @@ line-height: 1.6;
 display: flex;
 flex-wrap: wrap;
 gap: 50px;
-align-items: center;
+align-items: flex-start;
 }
 .contact-form {
 flex: 1;
@@ -992,6 +1060,23 @@ transition: color 0.3s ease;
 .contact-text a:hover {
 color: var(--accent);
 }
+
+/* --- Map Styles --- */
+.map-container {
+width: 100%;
+height: 300px;
+border-radius: 15px;
+overflow: hidden;
+box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+margin-bottom: 40px;
+border: 2px solid #eee;
+}
+.map-container iframe {
+width: 100%;
+height: 100%;
+border: 0;
+}
+
 .social-links {
 display: flex;
 gap: 15px;
@@ -1071,11 +1156,11 @@ font-size: 0.9rem;
 color: #aaa;
 }
 
-/* --- Animations --- */
+/* --- Animations (Landing Page Style) --- */
 @keyframes fadeInUp {
 from {
 opacity: 0;
-transform: translateY(30px);
+transform: translateY(40px);
 }
 to {
 opacity: 1;
@@ -1084,8 +1169,9 @@ transform: translateY(0);
 }
 .animate-in {
 opacity: 0;
-transform: translateY(30px);
-transition: all 0.8s ease;
+transform: translateY(40px);
+transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+will-change: opacity, transform;
 }
 .animate-in.appear {
 opacity: 1;
@@ -1094,9 +1180,7 @@ transform: translateY(0);
 
 /* --- Responsive Design --- */
 @media (max-width: 992px) {
-.hero h1 {
-font-size: 2.8rem;
-}
+.hero h1 { font-size: 2.8rem; }
 .nav-menu {
 position: fixed;
 top: 70px;
@@ -1109,56 +1193,22 @@ align-items: center;
 padding: 50px 0;
 transition: all 0.5s ease;
 }
-.nav-menu.active {
-left: 0;
-}
-.nav-menu li {
-margin: 15px 0;
-}
-.hamburger {
-display: block;
-}
-.focus-areas {
-grid-template-columns: 1fr;
-}
+.nav-menu.active { left: 0; }
+.nav-menu li { margin: 15px 0; }
+.hamburger { display: block; }
+.focus-areas { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
-.hero h1 {
-font-size: 2.3rem;
-}
-.hero p {
-font-size: 1.1rem;
-}
-.hero-buttons {
-flex-direction: column;
-gap: 15px;
-}
-.btn {
-width: 100%;
-text-align: center;
-}
-.section {
-padding: 70px 0;
-}
-.section-title h2 {
-font-size: 2rem;
-}
-.services-grid {
-grid-template-columns: 1fr;
-}
-.integration-steps {
-flex-direction: column;
-align-items: center;
-}
-.step {
-flex-direction: column;
-text-align: center;
-}
-.step-arrow {
-width: 2px;
-height: 40px;
-margin: 10px 0;
-}
+.hero h1 { font-size: 2.3rem; }
+.hero p { font-size: 1.1rem; }
+.hero-buttons { flex-direction: column; gap: 15px; }
+.btn { width: 100%; text-align: center; }
+.section { padding: 70px 0; }
+.section-title h2 { font-size: 2rem; }
+.services-grid { grid-template-columns: 1fr; }
+.integration-steps { flex-direction: column; align-items: center; }
+.step { flex-direction: column; text-align: center; }
+.step-arrow { width: 2px; height: 40px; margin: 10px 0; }
 .step-arrow::after {
 content: '';
 position: absolute;
@@ -1175,25 +1225,24 @@ left: -4px;
 }
 }
 @media (max-width: 576px) {
-.hero {
-height: auto;
-padding: 150px 0 100px;
-}
-.hero h1 {
-font-size: 2rem;
-}
-.tool-card, .case-card, .team-member, .service-card {
-padding: 20px;
-}
-.case-image {
-height: 200px;
-}
-.video-wrapper {
-padding-bottom: 75%; 
-}
+.hero { padding: 120px 0 60px; }
+.hero h1 { font-size: 2rem; }
+.tool-card, .case-card, .team-member, .service-card { padding: 20px; }
+.case-image { height: 200px; }
+.video-wrapper { padding-bottom: 75%; }
+/* Asegurar que el logo no se haga gigante en móviles */
 .logo img {
 height: 40px;
 }
+#backToTop, .whatsapp-float {
+width: 50px;
+height: 50px;
+font-size: 24px;
+right: 20px;
+}
+#backToTop { bottom: 90px; }
+.whatsapp-float { bottom: 20px; }
+.map-container { height: 250px; }
 }
 </style>
 </head>
@@ -1235,14 +1284,14 @@ height: 40px;
 </div>
 </section>
 
-<!-- Video Section (MOVED TO TOP AS REQUESTED) -->
+<!-- Video Section -->
 <section class="video-section" id="video">
 <div class="container">
-<div class="section-title">
+<div class="section-title animate-in">
 <h2>Video Presentación</h2>
 <p>Descubre cómo transformamos la gestión del territorio con tecnología de punta</p>
 </div>
-<div class="video-container">
+<div class="video-container animate-in">
 <div class="video-wrapper">
 <iframe src="https://www.youtube.com/embed/QAQoTJk9Gfk" title="Geonorte - Presentación" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
@@ -1253,7 +1302,7 @@ height: 40px;
 <!-- About Section -->
 <section class="section" id="nosotros">
 <div class="container">
-<div class="section-title">
+<div class="section-title animate-in">
 <h2>Quiénes Somos</h2>
 <p>Desarrollamos herramientas técnicas que resuelven desafíos críticos en planificación territorial, catastro y desarrollo sostenible.</p>
 </div>
@@ -1296,21 +1345,21 @@ height: 40px;
 </div>
 </section>
 
-<!-- Services Section (Inserted in Middle) -->
+<!-- Services Section -->
 <section class="section services-section" id="servicios">
 <div class="container">
-<div class="section-title">
+<div class="section-title animate-in">
 <h2>Nuestros Servicios</h2>
 <p>Soluciones integrales para la identificación, evaluación y gestión del territorio.</p>
 </div>
 
-<div class="services-intro">
+<div class="services-intro animate-in">
 Somos una empresa especializada en el análisis del territorio mediante tecnologías geoespaciales avanzadas, orientada a apoyar la toma de decisiones en proyectos de exploración minera, infraestructura, gestión ambiental y gestión del riesgo. Integramos SIG, teledetección, drones, modelamiento territorial e inteligencia artificial para ofrecer soluciones técnicas sólidas, eficientes y adaptadas al contexto local.
 </div>
 
 <div class="services-grid">
-<!-- Servicio 1: Exploración Minera (MODIFICADO) -->
-<div class="service-card animate-in">
+<!-- Servicio 1 -->
+<div class="service-card animate-in" style="transition-delay: 100ms;">
 <div class="service-header">
 <div class="service-number">01</div>
 <div class="service-icon"><i class="fas fa-gem"></i></div>
@@ -1318,7 +1367,8 @@ Somos una empresa especializada en el análisis del territorio mediante tecnolog
 <div class="service-content">
 <h3>Exploración Minera</h3>
 <p class="desc">
-Exploración minera basada en geointeligencia y análisis predictivo para identificar y priorizar áreas con potencial mineral, reduciendo riesgo exploratorio e inversión innecesaria.
+Servicio integral de exploración minera para la identificación, evaluación y priorización de áreas con potencial mineral,
+tanto en sistemas primarios como secundarios, orientado a reducir el riesgo exploratorio y optimizar la inversión.
 </p>
 <ul class="service-list">
 <li>Análisis avanzado de imágenes satelitales (Sentinel-2, Landsat, ASTER, Sentinel-1).</li>
@@ -1338,8 +1388,8 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 
-<!-- Servicio 2: Topografía y Geomática -->
-<div class="service-card animate-in">
+<!-- Servicio 2 -->
+<div class="service-card animate-in" style="transition-delay: 200ms;">
 <div class="service-header">
 <div class="service-number">02</div>
 <div class="service-icon"><i class="fas fa-ruler-combined"></i></div>
@@ -1361,8 +1411,8 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 
-<!-- Servicio 3: Catastro y Gestión de Tierras -->
-<div class="service-card animate-in">
+<!-- Servicio 3 -->
+<div class="service-card animate-in" style="transition-delay: 300ms;">
 <div class="service-header">
 <div class="service-number">03</div>
 <div class="service-icon"><i class="fas fa-map-marked-alt"></i></div>
@@ -1384,8 +1434,8 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 
-<!-- Servicio 4: IA aplicada al Territorio -->
-<div class="service-card animate-in">
+<!-- Servicio 4 -->
+<div class="service-card animate-in" style="transition-delay: 100ms;">
 <div class="service-header">
 <div class="service-number">04</div>
 <div class="service-icon"><i class="fas fa-brain"></i></div>
@@ -1407,8 +1457,8 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 
-<!-- Servicio 5: Desarrollo de Herramientas y Automatización -->
-<div class="service-card animate-in">
+<!-- Servicio 5 -->
+<div class="service-card animate-in" style="transition-delay: 200ms;">
 <div class="service-header">
 <div class="service-number">05</div>
 <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
@@ -1430,8 +1480,8 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 
-<!-- Servicio 6: Hidrología y Recursos Hídricos -->
-<div class="service-card animate-in">
+<!-- Servicio 6 -->
+<div class="service-card animate-in" style="transition-delay: 300ms;">
 <div class="service-header">
 <div class="service-number">06</div>
 <div class="service-icon"><i class="fas fa-water"></i></div>
@@ -1453,8 +1503,8 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 
-<!-- Servicio 7: Gestión de Riesgos y Medio Ambiente -->
-<div class="service-card animate-in">
+<!-- Servicio 7 -->
+<div class="service-card animate-in" style="transition-delay: 100ms;">
 <div class="service-header">
 <div class="service-number">07</div>
 <div class="service-icon"><i class="fas fa-exclamation-triangle"></i></div>
@@ -1476,19 +1526,19 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 
-</div> <!-- End Grid -->
+</div>
 </div>
 </section>
 
 <!-- Tools Section -->
 <section class="section tools" id="herramientas">
 <div class="container">
-<div class="section-title">
+<div class="section-title animate-in">
 <h2>Nuestras Herramientas Clave</h2>
 <p>Soluciones tecnológicas diseñadas para transformar la gestión territorial con inteligencia artificial.</p>
 </div>
 <div class="tools-grid">
-<div class="tool-card animate-in">
+<div class="tool-card animate-in" style="transition-delay: 100ms;">
 <div class="tool-number">1</div>
 <h3>Plataforma SIG-IA</h3>
 <p>Análisis multicriterio automatizado para planes de ordenamiento territorial. Detección de cambios de uso de suelo mediante redes neuronales e imágenes satelitales.</p>
@@ -1496,7 +1546,7 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 <p><strong>Caso práctico:</strong> Identificación de zonas óptimas para relleno sanitario con IA en zonas rurales.</p>
 </div>
 </div>
-<div class="tool-card animate-in">
+<div class="tool-card animate-in" style="transition-delay: 200ms;">
 <div class="tool-number">2</div>
 <h3>Catastro 4.0</h3>
 <p>Extracción automática de linderos y parcelas con visión por computadora. Cruce masivo de datos con registros notariales mediante procesamiento de lenguaje natural (NLP).</p>
@@ -1504,7 +1554,7 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 <p><strong>Impacto:</strong> Reducción de conflictos de propiedad hasta en un 70%.</p>
 </div>
 </div>
-<div class="tool-card animate-in">
+<div class="tool-card animate-in" style="transition-delay: 300ms;">
 <div class="tool-number">3</div>
 <h3>Territorial Insights</h3>
 <p>Modelos predictivos de expansión urbana con series históricas Landsat/Sentinel. Simulador de impacto ambiental para grandes proyectos de infraestructura.</p>
@@ -1512,7 +1562,7 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 <p><strong>Beneficio:</strong> Toma de decisiones informada con proyecciones precisas del crecimiento urbano.</p>
 </div>
 </div>
-<div class="tool-card animate-in">
+<div class="tool-card animate-in" style="transition-delay: 400ms;">
 <div class="tool-number">4</div>
 <h3>Geo-Risk Manager</h3>
 <p>Sistema de alerta temprana para inundaciones (análisis de cuencas + IA). Predicción de deslizamientos mediante modelos LIDAR y aprendizaje automático.</p>
@@ -1527,12 +1577,12 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 <!-- Case Studies Section -->
 <section class="section case-studies" id="casos">
 <div class="container">
-<div class="section-title">
+<div class="section-title animate-in">
 <h2>Casos de Estudio</h2>
 <p>Proyectos reales donde nuestras soluciones han transformado la gestión territorial en Bolivia.</p>
 </div>
 <div class="case-grid">
-<div class="case-card animate-in">
+<div class="case-card animate-in" style="transition-delay: 100ms;">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVbS3UeMY0v0FMSaFIwDPlwhJ4NxUvCjSan1Acf_kWx-6c4c4HOf3f3lbjm6BhhAyAczqyvOdNhxP_Ie60YOfNVFXfvtSZIJjLlmPj79CZBlgz6FUOUhGoDvMSwBz2YG7HhfbdqN3d33aodcH2HaGzi7zL9zwAm-PgXk2sOWDMWfz9JBN_PqqA_hRuihRf/s320/WhatsApp%20Image%202026-01-23%20at%208.35.36%20AM.jpeg" class="case-image">
 <div class="case-content">
 <span class="location">Municipio de Caranavi</span>
@@ -1546,7 +1596,7 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 </div>
-<div class="case-card animate-in">
+<div class="case-card animate-in" style="transition-delay: 200ms;">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjv4hDa8abzaBRdxWgaDpBNW1PkVXdOidrMx1oJM1lGOlJK6oVX8Jg5Q2DL1Ppl5TmveslVgKZbaX1WSGMSXyynU-3y7K8I7IDg6caeBZC7TksmnYtOpG10k9q8rQxKuJ46QiSDbcVYJpHOxOFrp5pkxEFVpQDCL0f7jfD2cqkW8nhd4dXp_N99KSRWgwtM/w142-h395/edited-image-1756935588992.png" alt="Homologación de radio Urbano La Asunta" class="case-image">
 <div class="case-content">
 <span class="location">La Asunta, La Paz</span>
@@ -1560,7 +1610,7 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 </div>
-<div class="case-card animate-in">
+<div class="case-card animate-in" style="transition-delay: 300ms;">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwbgCLyzPZkNe6p0nqiUVzkq12mV17lDfyTeWaSFAVPWON24SrC91Hv-O_Ie90M233GGF5iUtgDUJdpeVcBz-qyFviWZOBjywu_-lFMN6PuBbCUtruVEuCtiZAmQm5PGdPMn3x_E6ImTw2XWI0_-6qFgWqRYYzAcsBeyVIHzV_7GV7qKBbQGVrkGdD7_D9/s320/edited-image-1756935362188.png" alt="Proyecto de Catastro Digital" class="case-image">
 <div class="case-content">
 <span class="location">Samaipata, Santa Cruz</span>
@@ -1576,8 +1626,7 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 
 <!-- Irupana Mining Case -->
-<div class="case-card animate-in">
-<!-- Placeholder image representing mining/geology exploration -->
+<div class="case-card animate-in" style="transition-delay: 100ms;">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzd-rL_UbpU7jhO_RbQD_dcLBsagII445qJZYW7v3dMplAhdkV2CJGIEL2HUwVm1QKSSz0Do1vxFP4aKdRi70vMUkxRR6OCse1x9QWIcbBmZrkkMa4fjxS1h87xh12onLSXwIKtGTKcnBfTBBovqLmFNPr8Bv09zYEtCveQ7giNRahdb1qDKraGo3af-pI/s400/Gemini_Generated_Image_hlkbnbhlkbnbhlkb%20%281%29.png" alt="Exploración Minera Irupana" class="case-image">
 <div class="case-content">
 <span class="location">Latino America</span>
@@ -1590,7 +1639,6 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 <span class="tech-tag">DEM</span>
 <span class="tech-tag">Cartografía Geomorfológica</span>
 </div>
-<!-- BOTÓN INSERTADO AQUÍ -->
 <div style="margin-top: 20px; text-align: center;">
 <a href="https://eddycc66.github.io/serviciosGeonorth/" target="_blank" class="btn btn-primary" style="padding: 10px 25px; font-size: 0.9rem; display: inline-block;">Ver Proyecto Completo</a>
 </div>
@@ -1604,7 +1652,7 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 <!-- Differentiation Section -->
 <section class="section differentiation" id="diferencia">
 <div class="container">
-<div class="section-title">
+<div class="section-title animate-in">
 <h2>Nuestra Diferencia</h2>
 <p>Lo que nos hace únicos en el mercado de soluciones geoespaciales con inteligencia artificial.</p>
 </div>
@@ -1645,12 +1693,12 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 <!-- Impact Section -->
 <section class="section" id="impacto">
 <div class="container">
-<div class="section-title">
+<div class="section-title animate-in">
 <h2>Casos de Impacto</h2>
 <p>Proyectos reales donde nuestras soluciones han transformado la gestión territorial.</p>
 </div>
 <div class="case-grid">
-<div class="case-card animate-in">
+<div class="case-card animate-in" style="transition-delay: 100ms;">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgn1o7kRh-kQT96AYHYxNOISAoELeyaRV7mxx_7wkxPl4YBDFEkHE_JPpZLItYsfhP9I_qKsJN6VbTQ-36f5focoTwch4UFpaPnCk31OPVCHrZgd2wxmbsB-FtDJeAwqajRysDO5NQTaBLbQq0UrD8JwX29RV4k94XBwIxtOr2Ao_u5EzPeOSdyf5sYpaIz/s1600/WhatsApp%20Image%202026-01-26%20at%208.29.00%20PM.jpeg" alt="Proyecto en Copacabana" class="case-image">
 <div class="case-content">
 <span class="location">Copacabana, Batallas, Collquencha y Villa Libertad Licoma</span>
@@ -1663,7 +1711,7 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 </div>
-<div class="case-card animate-in">
+<div class="case-card animate-in" style="transition-delay: 200ms;">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhSd4WE5bsPSGwVGGpVHlmziJbZuMB8nS_9usv9xU-Tm7i2ZLgL0ZLvdwiV6zQLprow2MKItZOF5sHYPnhAapmhqL8xriA9qLjsM0EI3e7JT4aYGRStsNBQF3D_fbfrBEco1GwbNBd7hCZ2AabHoyksm2ijLzxK94QprzcgXsAcm7HOcMHezF-YA2aTMxSe/s320/WhatsApp%20Image%202026-01-26%20at%207.59.29%20PM%20%281%29.jpeg" alt="Catastro Digital Samaipata" class="case-image">
 <div class="case-content">
 <span class="location">Samaipata, Bolivia</span>
@@ -1684,13 +1732,13 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 <!-- Team Section -->
 <section class="section team" id="equipo">
 <div class="container">
-<div class="section-title">
+<div class="section-title animate-in">
 <h2>Equipo Geonorte</h2>
 <p>Un equipo multidisciplinario comprometido con la innovación en las ciencias de la tierra.</p>
 </div>
 <div class="team-grid">
 <!-- MIEMBRO 1: EDWIN -->
-<div class="team-member animate-in">
+<div class="team-member animate-in" style="transition-delay: 100ms;">
 <div class="member-image">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhtePgFL8wVUSf05bU00H3f6oyboVbW-Dc9EdgGnwvqCFlTKHp0eai6qqE_XNzdxdgAKt9IG7ZkcdTkEhzyP-JSZpsgpg6jgCTXxSE-1MF1kjvpi0EzE8fXKRNlvt45J7XjWV1Z7jLdpt5Zot0Hp_CBr1dqyyA5cXyndVIHmGLiIEKu2XdSOtco9raEpbeY/s200/Gemini_Generated_Image_gxklargxklargxkl.png" alt="Edwin Calle Condori">
 </div>
@@ -1717,7 +1765,7 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 
 <!-- MIEMBRO 2: IVAN -->
-<div class="team-member animate-in">
+<div class="team-member animate-in" style="transition-delay: 200ms;">
 <div class="member-image">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpq2y_KP0G2Zxl67E0HtFzXKBFR1RqVqFGQKScmsfvvewoeY5OY54oZYy3YTVOH0kGDQ_sN5Oqo1lUcrEOoKe10jghtG2zmbK981PWF-f54qBLFQB2SVS6dg22TMKtMZPyZCHUJosDlpgu2mN0CSEurXlk_8YQ5xNgA8Wz9kY96J6RPQ0g_kg99hg_gnEl/s320/Gemini_Generated_Image_1h48ex1h48ex1h48.png" alt="Ivan Edu Choque Alcon">
 </div>
@@ -1739,8 +1787,8 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 
-<!-- MIEMBRO 3: WILLY (ACTUALIZADO) -->
-<div class="team-member animate-in">
+<!-- MIEMBRO 3: WILLY -->
+<div class="team-member animate-in" style="transition-delay: 300ms;">
 <div class="member-image">
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYL2FClT55UeovP31vLWuOellMdiKtnCaKF1UQA2pqzTj8v-qd-6OJoZRMXhJqZCg1pdzS-_u2TrUWkIsfP72hec-z_LZgOaEtpOGJaiMReon2hsyFCdRrLVKoA7kn3RRS8wrHetFvxR5ZSf82QYaosEJuxFuMy5a8kM3hS5Rqy84JjjamJnrFnT0Vct20/s200/ChatGPT%20Image%2023%20ene%202026%20%2C%2010_33_24%20p.m..png" alt="Willy Merlo">
 </div>
@@ -1782,21 +1830,21 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 <p class="quote">“Transformamos datos geoespaciales en soluciones para personas.”</p>
 <p>Trabajamos por un futuro más justo, sostenible y resiliente para nuestras comunidades.</p>
 <div class="commitment-goals">
-<div class="goal">
+<div class="goal animate-in" style="transition-delay: 100ms;">
 <div class="goal-icon">
 <i class="fas fa-building"></i>
 </div>
 <h3>Ciudades resilientes</h3>
 <p>Desarrollamos herramientas que ayudan a construir ciudades más preparadas para enfrentar los desafíos del cambio climático y el crecimiento urbano.</p>
 </div>
-<div class="goal">
+<div class="goal animate-in" style="transition-delay: 200ms;">
 <div class="goal-icon">
 <i class="fas fa-seedling"></i>
 </div>
 <h3>Planificación rural con justicia social</h3>
 <p>Promovemos un desarrollo rural equitativo mediante soluciones tecnológicas que empoderan a las comunidades y protegen sus derechos territoriales.</p>
 </div>
-<div class="goal">
+<div class="goal animate-in" style="transition-delay: 300ms;">
 <div class="goal-icon">
 <i class="fas fa-balance-scale"></i>
 </div>
@@ -1810,7 +1858,7 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 <!-- Contact Section -->
 <section class="section" id="contacto">
 <div class="container">
-<div class="section-title">
+<div class="section-title animate-in">
 <h2>¿Quieres revolucionar la gestión de tu territorio?</h2>
 <p>Contáctanos hoy mismo y descubre cómo nuestras soluciones pueden transformar tu organización.</p>
 </div>
@@ -1899,6 +1947,12 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 </div>
 </div>
 </div>
+
+<!-- Google Maps Embed -->
+<div class="map-container">
+<iframe src="https://maps.google.com/maps?q=La%20Paz,%20Bolivia&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Ubicación Geonorte"></iframe>
+</div>
+
 <h4>Visita nuestro Blog</h4>
 <div class="social-links">
 <a href="https://geonort.blogspot.com/" class="social-link" target="_blank">
@@ -1963,7 +2017,37 @@ mapas prospectivos e informes técnicos para toma de decisiones e inversión.
 <!-- Toast Notification Container -->
 <div id="toast" class="toast">Mensaje enviado con éxito</div>
 
+<!-- Back to Top Button -->
+<button onclick="topFunction()" id="backToTop" title="Ir arriba"><i class="fas fa-arrow-up"></i></button>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/59167345804" class="whatsapp-float" target="_blank">
+<i class="fab fa-whatsapp"></i>
+</a>
+
 <script>
+// --- Animations: Scroll Trigger ---
+const animateElements = document.querySelectorAll('.animate-in');
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('appear');
+}
+});
+}, { threshold: 0.15 });
+
+animateElements.forEach(element => {
+observer.observe(element);
+});
+
+// --- Hero Animation on Load ---
+window.addEventListener('load', () => {
+const heroContent = document.querySelector('.hero-content');
+if(heroContent) {
+heroContent.style.animation = 'fadeInUp 1s ease forwards';
+}
+});
+
 // Mobile Navigation
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -1972,7 +2056,6 @@ navMenu.classList.toggle('active');
 hamburger.innerHTML = navMenu.classList.contains('active') ?
 '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
 });
-// Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-menu a').forEach(link => {
 link.addEventListener('click', () => {
 navMenu.classList.remove('active');
@@ -1980,7 +2063,7 @@ hamburger.innerHTML = '<i class="fas fa-bars"></i>';
 });
 });
 
-// NEW: Team Member Toggle Function
+// Team Member Toggle Function
 function toggleDetails(button) {
 const detailsDiv = button.nextElementSibling;
 if (detailsDiv.style.display === "block") {
@@ -1988,25 +2071,11 @@ detailsDiv.style.display = "none";
 button.innerText = "Leer más";
 button.classList.remove('active');
 } else {
-// Close others if you want accordion style (optional, currently removed for multi-view)
 detailsDiv.style.display = "block";
 button.innerText = "Cerrar";
 button.classList.add('active');
 }
 }
-
-// Scroll Animation
-const animateElements = document.querySelectorAll('.animate-in');
-const observer = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.classList.add('appear');
-}
-});
-}, { threshold: 0.1 });
-animateElements.forEach(element => {
-observer.observe(element);
-});
 
 // Form Submission (REAL FUNCTIONALITY)
 const contactForm = document.getElementById('contactForm');
@@ -2018,7 +2087,6 @@ const action = contactForm.action;
 const button = contactForm.querySelector('button[type="submit"]');
 const originalText = button.innerText;
 
-// UI Loading State
 button.innerText = 'Enviando...';
 button.disabled = true;
 
@@ -2030,28 +2098,20 @@ headers: {
 }
 }).then(response => {
 if (response.ok) {
-// Success
 const toast = document.getElementById('toast');
 toast.className = 'toast show success';
 toast.innerText = '¡Gracias! Hemos recibido tu mensaje.';
 contactForm.reset();
-setTimeout(function(){ 
-toast.className = toast.className.replace('show', ''); 
-}, 3000);
+setTimeout(function(){ toast.className = toast.className.replace('show', ''); }, 3000);
 } else {
 throw new Error('Error en el servidor');
 }
 }).catch(error => {
-// Error
 const toast = document.getElementById('toast');
 toast.className = 'toast show error';
 toast.innerText = 'Hubo un error al enviar. Inténtalo de nuevo.';
-console.error('Error:', error);
-setTimeout(function(){ 
-toast.className = toast.className.replace('show', ''); 
-}, 3000);
+setTimeout(function(){ toast.className = toast.className.replace('show', ''); }, 3000);
 }).finally(() => {
-// Reset Button State
 button.innerText = originalText;
 button.disabled = false;
 });
@@ -2061,14 +2121,22 @@ button.disabled = false;
 // Header scroll effect
 window.addEventListener('scroll', function() {
 const header = document.querySelector('header');
-if (window.scrollY > 100) {
+const backToTop = document.getElementById("backToTop");
+if (window.scrollY > 50) {
 header.style.padding = '10px 0';
 header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+backToTop.style.display = "block";
 } else {
 header.style.padding = '15px 0';
 header.style.boxShadow = 'none';
+backToTop.style.display = "none";
 }
 });
+
+// Back to Top Function
+function topFunction() {
+window.scrollTo({top: 0, behavior: 'smooth'});
+}
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
