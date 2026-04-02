@@ -15,10 +15,10 @@ body{font-family:'Poppins',sans-serif;color:var(--dark);overflow-x:hidden;backgr
 .container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
 img{max-width:100%;height:auto;display:block}
 
-/* === LOGO === */
-.logo{display:flex;align-items:center;padding:5px 0;text-decoration:none}
-.logo img{width:auto;height:55px;max-width:220px;object-fit:contain;transition:transform .3s,filter .3s}
-.logo img:hover{transform:scale(1.08);filter:drop-shadow(0 0 8px rgba(0,188,212,.5))}
+/* === LOGOS === */
+.logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.logo img{height:48px;width:auto;object-fit:contain;transition:transform .3s,filter .3s}
+.logo img:hover{transform:scale(1.06);filter:drop-shadow(0 0 8px rgba(0,188,212,.5))}
 
 /* === TOAST === */
 .toast{visibility:hidden;min-width:250px;background:#333;color:#fff;text-align:center;border-radius:8px;padding:16px;position:fixed;z-index:2000;left:50%;bottom:30px;transform:translateX(-50%);font-size:1rem;box-shadow:0 4px 15px rgba(0,0,0,.3);opacity:0;transition:opacity .3s,bottom .3s}
@@ -33,15 +33,17 @@ img{max-width:100%;height:auto;display:block}
 .wa-float:hover{background:#1ebc57;transform:scale(1.1);box-shadow:0 4px 15px rgba(37,211,102,.4)}
 
 /* === HEADER === */
-header{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(10,46,92,.95);backdrop-filter:blur(10px);padding:15px 0;transition:all .3s;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-.nav-container{display:flex;justify-content:space-between;align-items:center}
-.nav-menu{display:flex;list-style:none}
-.nav-menu li{margin-left:30px}
-.nav-menu a{color:var(--light);text-decoration:none;font-weight:500;font-size:1rem;transition:all .3s;position:relative}
+header{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(10,46,92,.95);backdrop-filter:blur(10px);padding:12px 0;transition:all .3s;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+.nav-container{display:flex;justify-content:space-between;align-items:center;gap:15px}
+.nav-left{display:flex;align-items:center;flex-shrink:0}
+.nav-right{display:flex;align-items:center;flex-shrink:0}
+.nav-menu{display:flex;list-style:none;flex:1;justify-content:center;flex-wrap:nowrap}
+.nav-menu li{margin:0 10px}
+.nav-menu a{color:var(--light);text-decoration:none;font-weight:500;font-size:.92rem;transition:all .3s;position:relative;white-space:nowrap}
 .nav-menu a:hover{color:var(--accent)}
 .nav-menu a::after{content:'';position:absolute;width:0;height:2px;bottom:-5px;left:0;background:var(--accent);transition:width .3s}
 .nav-menu a:hover::after{width:100%}
-.hamburger{display:none;cursor:pointer;color:var(--light);font-size:1.5rem}
+.hamburger{display:none;cursor:pointer;color:var(--light);font-size:1.5rem;flex-shrink:0}
 
 /* === HERO === */
 .hero{min-height:100vh;padding:120px 0 80px;background:linear-gradient(rgba(10,46,92,.85),rgba(10,46,92,.9)),url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-IXzUWoRbBq3yWF-nqdYxqQi-WZlygDRQuKggyax9giw9uweh2SAjTasECvev_StF-brPpYxPSkEcLXc-Cfw1qsdcYuMXQq5J_hfjGkp7eFvpfG7P33IAk9VnxIOMxMLW0Z_42IkzbRAtu05ffU__oV7kYugtr5LdnX3YOCJaxKeW4vcWGDIJhCFLHSsr/s400/Dise%C3%B1o%20sin%20t%C3%ADtulo.gif') no-repeat center center/cover;display:flex;align-items:center;position:relative;overflow:hidden}
@@ -226,50 +228,16 @@ footer{background:var(--primary);color:var(--light);padding:50px 0 20px}
 .footer-links a:hover{color:var(--accent);transform:translateX(5px)}
 .footer-bottom{text-align:center;padding-top:30px;border-top:1px solid rgba(255,255,255,.1);font-size:.9rem;color:#aaa}
 
-/* ============================================= */
-/* === ANIMACIONES DE SCROLL (CORREGIDAS) ===== */
-/* ============================================= */
-@keyframes fadeInUp{
-from{opacity:0;transform:translateY(50px)}
-to{opacity:1;transform:translateY(0)}
-}
-@keyframes fadeInLeft{
-from{opacity:0;transform:translateX(-50px)}
-to{opacity:1;transform:translateX(0)}
-}
-@keyframes fadeInRight{
-from{opacity:0;transform:translateX(50px)}
-to{opacity:1;transform:translateX(0)}
-}
-@keyframes scaleIn{
-from{opacity:0;transform:scale(.85)}
-to{opacity:1;transform:scale(1)}
-}
-
-/* Estado inicial: oculto */
-.anim-fade-up,
-.anim-fade-left,
-.anim-fade-right,
-.anim-scale{
-opacity:0;
-transition:none;
-}
-
-/* Estado activo: visible con animación */
-.anim-fade-up.visible{
-animation:fadeInUp .8s cubic-bezier(.22,1,.36,1) forwards;
-}
-.anim-fade-left.visible{
-animation:fadeInLeft .8s cubic-bezier(.22,1,.36,1) forwards;
-}
-.anim-fade-right.visible{
-animation:fadeInRight .8s cubic-bezier(.22,1,.36,1) forwards;
-}
-.anim-scale.visible{
-animation:scaleIn .7s cubic-bezier(.22,1,.36,1) forwards;
-}
-
-/* Delays */
+/* === ANIMACIONES === */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(-50px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeInRight{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+.anim-fade-up,.anim-fade-left,.anim-fade-right,.anim-scale{opacity:0;transition:none}
+.anim-fade-up.visible{animation:fadeInUp .8s cubic-bezier(.22,1,.36,1) forwards}
+.anim-fade-left.visible{animation:fadeInLeft .8s cubic-bezier(.22,1,.36,1) forwards}
+.anim-fade-right.visible{animation:fadeInRight .8s cubic-bezier(.22,1,.36,1) forwards}
+.anim-scale.visible{animation:scaleIn .7s cubic-bezier(.22,1,.36,1) forwards}
 .anim-delay-1{animation-delay:.1s!important}
 .anim-delay-2{animation-delay:.2s!important}
 .anim-delay-3{animation-delay:.3s!important}
@@ -278,40 +246,47 @@ animation:scaleIn .7s cubic-bezier(.22,1,.36,1) forwards;
 .anim-delay-6{animation-delay:.6s!important}
 
 /* === RESPONSIVE === */
+@media(max-width:1100px){
+    .nav-menu li{margin:0 6px}
+    .nav-menu a{font-size:.85rem}
+}
 @media(max-width:992px){
-.hero h1{font-size:2.8rem}
-.nav-menu{position:fixed;top:70px;left:-100%;width:100%;height:calc(100vh - 70px);background:var(--primary);flex-direction:column;align-items:center;padding:50px 0;transition:all .5s}
-.nav-menu.active{left:0}
-.nav-menu li{margin:15px 0}
-.hamburger{display:block}
-.focus-areas{grid-template-columns:1fr}
+    .hero h1{font-size:2.8rem}
+    .nav-menu{position:fixed;top:68px;left:-100%;width:100%;height:calc(100vh - 68px);background:var(--primary);flex-direction:column;align-items:center;padding:50px 0;transition:all .5s;justify-content:flex-start}
+    .nav-menu.active{left:0}
+    .nav-menu li{margin:12px 0}
+    .nav-menu a{font-size:1rem}
+    .hamburger{display:block}
+    .focus-areas{grid-template-columns:1fr}
+    .nav-right .logo img{height:38px}
 }
 @media(max-width:768px){
-.hero h1{font-size:2.3rem}
-.company-badge{font-size:.75rem;padding:6px 16px}
-.hero p{font-size:1.1rem}
-.hero-buttons{flex-direction:column;gap:15px}
-.btn{width:100%;text-align:center}
-.section{padding:70px 0}
-.section-title h2{font-size:2rem}
-.services-grid{grid-template-columns:1fr}
-.integration-steps{flex-direction:column;align-items:center}
-.step{flex-direction:column;text-align:center}
-.step-arrow{width:2px;height:40px;margin:10px 0}
-.step-arrow::after{transform:rotate(90deg);top:35px;left:-4px}
+    .hero h1{font-size:2.3rem}
+    .company-badge{font-size:.75rem;padding:6px 16px}
+    .hero p{font-size:1.1rem}
+    .hero-buttons{flex-direction:column;gap:15px}
+    .btn{width:100%;text-align:center}
+    .section{padding:70px 0}
+    .section-title h2{font-size:2rem}
+    .services-grid{grid-template-columns:1fr}
+    .integration-steps{flex-direction:column;align-items:center}
+    .step{flex-direction:column;text-align:center}
+    .step-arrow{width:2px;height:40px;margin:10px 0}
+    .step-arrow::after{transform:rotate(90deg);top:35px;left:-4px}
+    .nav-left .logo img{height:38px}
 }
 @media(max-width:576px){
-.hero{padding:120px 0 60px}
-.hero h1{font-size:2rem}
-.tool-card,.case-card,.team-member,.service-card{padding:20px}
-.case-image{height:200px}
-.video-wrapper{padding-bottom:75%}
-.logo img{height:40px;max-width:160px}
-#backToTop,.wa-float{width:50px;height:50px;font-size:24px;right:20px}
-#backToTop{bottom:90px}
-.wa-float{bottom:20px}
-.map-container{height:250px}
-.about-company-name{font-size:.8rem;padding:8px 16px}
+    .hero{padding:120px 0 60px}
+    .hero h1{font-size:2rem}
+    .tool-card,.case-card,.team-member,.service-card{padding:20px}
+    .case-image{height:200px}
+    .video-wrapper{padding-bottom:75%}
+    .logo img{height:34px!important}
+    #backToTop,.wa-float{width:50px;height:50px;font-size:24px;right:20px}
+    #backToTop{bottom:90px}
+    .wa-float{bottom:20px}
+    .map-container{height:250px}
+    .about-company-name{font-size:.8rem;padding:8px 16px}
 }
 </style>
 </head>
@@ -320,21 +295,35 @@ animation:scaleIn .7s cubic-bezier(.22,1,.36,1) forwards;
 <!-- HEADER -->
 <header>
 <div class="container nav-container">
-<a href="#" class="logo">
-<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnHJIXW5EvcSRrYhJk1hMEIl_a4NlNKI_LeDvKiA7ZC97JHacYfwXMUaMs4C76pjt0Gzk4HIFd8aOroz6tkUl2H6wetHXOCXGZPKNwFEAK31wzSm1i7wzEtFdYogRnqzBvkYs_sU5k5qdi38vLslypGBIEF0GqRZ3fPlure_lkNSuR1ng0udjNDBWy_YHI/s320/logo_transparente.png" alt="SpatialMind - Geonorth">
-</a>
-<ul class="nav-menu">
-<li><a href="#inicio">Inicio</a></li>
-<li><a href="#nosotros">Nosotros</a></li>
-<li><a href="#servicios" style="color:var(--accent);font-weight:600">Servicios</a></li>
-<li><a href="#video">Video</a></li>
-<li><a href="#herramientas">Herramientas</a></li>
-<li><a href="#casos">Casos</a></li>
-<li><a href="#equipo">Equipo</a></li>
-<li><a href="https://geonort.blogspot.com/2025/08/cursos-disponibles.html" target="_blank">Cursos</a></li>
-<li><a href="#contacto">Contacto</a></li>
-</ul>
-<div class="hamburger"><i class="fas fa-bars"></i></div>
+
+    <!-- IZQUIERDA: Logo SpatialMind -->
+    <div class="nav-left">
+        <a href="#" class="logo" aria-label="SpatialMind">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5k5bPqkvXb8Sr_vcN-CUqyJTr1Z_dYIPuM6dBQLQ5huuohXyP0RTNch8cT_j2stiJIWl_OOEzeJk4Wgb2mRdjLVWBaFgG6J-0RqtKDqb06x7Kv2SOWTV6ujgFAFeYEOsOoGmvzIzAZiGY75kHZj1Eeo2jFDn_fWF5f80Plihhf5siCGLAUR48Dc6VpfkF/s320/logo%20empresa.png" alt="SpatialMind Soluciones Geoespaciales">
+        </a>
+    </div>
+
+    <!-- CENTRO: Menú de navegación -->
+    <ul class="nav-menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios" style="color:var(--accent);font-weight:600">Servicios</a></li>
+        <li><a href="#video">Video</a></li>
+        <li><a href="#herramientas">Herramientas</a></li>
+        <li><a href="#casos">Casos</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="https://geonort.blogspot.com/2025/08/cursos-disponibles.html" target="_blank">Cursos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+
+    <!-- DERECHA: Logo Geonorth + Hamburguesa -->
+    <div class="nav-right">
+        <a href="#" class="logo" aria-label="Geonorth">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnHJIXW5EvcSRrYhJk1hMEIl_a4NlNKI_LeDvKiA7ZC97JHacYfwXMUaMs4C76pjt0Gzk4HIFd8aOroz6tkUl2H6wetHXOCXGZPKNwFEAK31wzSm1i7wzEtFdYogRnqzBvkYs_sU5k5qdi38vLslypGBIEF0GqRZ3fPlure_lkNSuR1ng0udjNDBWy_YHI/s320/logo_transparente.png" alt="Geonorth">
+        </a>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+    </div>
+
 </div>
 </header>
 
@@ -882,41 +871,23 @@ Somos una empresa especializada en el análisis del territorio mediante tecnolog
 <a href="https://wa.me/59167345804" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <script>
-/* ==============================================
-   SISTEMA DE ANIMACIONES DE SCROLL (CORREGIDO)
-   ============================================== */
-
+/* === Animaciones de scroll === */
 (function() {
-    // Seleccionar todos los elementos con clase de animación
-    const animElements = document.querySelectorAll('.anim-fade-up, .anim-fade-left, .anim-fade-right, .anim-scale');
-
-    // Configuración del observer con threshold bajo para activar antes
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px 0px -60px 0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
+    var animElements = document.querySelectorAll('.anim-fade-up, .anim-fade-left, .anim-fade-right, .anim-scale');
+    var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) {
-                // Agregar la clase que dispara la animación CSS
                 entry.target.classList.add('visible');
-                // Dejar de observar después de animar (una sola vez)
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
-
-    // Observar cada elemento
-    animElements.forEach(function(el) {
-        observer.observe(el);
-    });
+    }, { root: null, rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
+    animElements.forEach(function(el) { observer.observe(el); });
 })();
 
 /* === Navegación móvil === */
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
+var hamburger = document.querySelector('.hamburger');
+var navMenu = document.querySelector('.nav-menu');
 hamburger.addEventListener('click', function() {
     navMenu.classList.toggle('active');
     hamburger.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
@@ -971,18 +942,21 @@ if (contactForm) {
     });
 }
 
-/* === Header scroll === */
+/* === Header scroll + logos proporcionales === */
 window.addEventListener('scroll', function() {
     var header = document.querySelector('header');
     var btt = document.getElementById("backToTop");
+    var allLogos = header.querySelectorAll('.logo img');
     if (window.scrollY > 50) {
-        header.style.padding = '10px 0';
-        header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+        header.style.padding = '8px 0';
+        header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.15)';
         btt.style.display = "block";
+        allLogos.forEach(function(img) { img.style.height = '38px'; });
     } else {
-        header.style.padding = '15px 0';
+        header.style.padding = '12px 0';
         header.style.boxShadow = 'none';
         btt.style.display = "none";
+        allLogos.forEach(function(img) { img.style.height = ''; });
     }
 });
 
